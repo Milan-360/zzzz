@@ -2,17 +2,21 @@
 
 namespace TigerSoccerClub
 {
-    class Program
+    class Registration
     {
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public bool Jersey { get; set; }
+        public double TotalPrice { get; set; }
 
-        public Program(int players, string name, string registration, string jersey, double price)
+        public Registration(string name, string type, bool jersey, double price)
         {
-            Players = players;
             Name = name;
-            Registration = registration;
+            Type = type;
             Jersey = jersey;
-            Price = price;
-        }xyz
+            TotalPrice = price;
+        }
+}
 
         public int Players { get; set; }
         public string Name { get; set; }
@@ -56,29 +60,19 @@ namespace TigerSoccerClub
                     Console.Write("Enter Yes/No to indicate wheather you want jersey: ");
                      Jersey = Console.ReadLine();
 
-                    if (Registration == "Kids" && Jersey == "Yes")
+                    switch (Registration)
                     {
-                          total = initalamt_kids + jerseyamt;
-                        Console.Write("Total price from " + Name + " is: " + total);
-                        Console.WriteLine("\n");
-
+                        case "Kids":
+                            total = Jersey == "Yes" ? initalamt_kids + jerseyamt : initalamt_kids;
+                            break;
+                        case "Adult":
+                            total = Jersey == "Yes" ? initalamt_adult + jerseyamt : initalamt_adult;
+                            break;
+                        default:
+                            Console.WriteLine("Invalid registration type.");
+                            break;
                     }
-                    else if (Registration == "Kids" && Jersey == "No")
-                    {
-                         total = initalamt_kids;
-                        Console.Write("Total price from " + Name + " is: " + total);
-                        Console.WriteLine("\n");
-                    }
-                    else if (Registration == "Adult" && Jersey == "Yes")
-                    {
-                         total = initalamt_adult + jerseyamt;
-                        Console.Write("Total price from " + Name + " is: " + total);
-                        Console.WriteLine("\n");
-                    }
-                    else
-                    {
-                        total = initalamt_adult;
-                        Console.Write("Total price from " + Name + " is: " + total);
+                    Console.Write("Total price from " + Name + " is: " + total);
                         Console.WriteLine("\n");
                     }
                     string s1 = "Summary of Registrations";
